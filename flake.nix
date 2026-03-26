@@ -25,10 +25,18 @@
 	          NIXOS_OZONE_WL = "1";
           };
         };
+        # "User environment" inside the devshell
+        userEnv = pkgs.buildEnv {
+          name = "user-env";
+          paths = [
+            pkgs.vscode        # VS Code behaves like a user package
+          ];
+        };
       in {
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
-            vscode
+            bashInteractive
+            userEnv   # add the "user-env" to the devshell
             jdk21_headless
           ];
           shellHook = ''
