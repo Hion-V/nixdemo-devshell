@@ -21,6 +21,9 @@
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
+          environment.sessionVariables = {
+	          NIXOS_OZONE_WL = "1";
+          };
         };
       in {
         devShells.default = pkgs.mkShell {
